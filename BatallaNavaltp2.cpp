@@ -27,7 +27,7 @@ int main() {
 		scanf("%d", &opcion);
 		
 		if (opcion == 1) {
-			printf("Tamaño del tablero: ");
+			printf("Tamano del tablero: ");
 			scanf("%d", &n);
 			
 			//tablero
