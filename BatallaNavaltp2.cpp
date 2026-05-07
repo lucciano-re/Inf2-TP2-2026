@@ -7,22 +7,28 @@
 char mejorJugador[50] = "Lucho";
 int mejorPuntaje = 9999999;
 
-//punteros char e int)
+//punteros char e int
+
+//n = tamaño del tablero
+//t = referencia a el inicio del array tablero 
+//fb = fila barco
+//cb = columna barco 
+
 void inicializarTablero(char *t, int n, int *fb, int *cb);
 void mostrarTablero(char *t, int n);
 int realizarDisparo(char *t, int n, int fb, int cb, int *f_tiro, int *c_tiro);
 
 int main() {
-	int n;
-	int barcoF, barcoC, opcion, tiros, gano;
+	int n, barcoF, barcoC, opcion, tiros, gano;
 	char nombreActual[50];
 	
 	srand(time(NULL));
 	
 	do {
 		printf("\n=== TP2 INFORMATICA II===\n");
-		if (mejorPuntaje < 9999998) printf("Record: %s con %d tiros\n", mejorJugador, mejorPuntaje);
-		
+		if (mejorPuntaje < 9999998) {
+      printf("Record: %s con %d tiros\n", mejorJugador, mejorPuntaje);
+		}
 		printf("1. Iniciar Partida\n2. Salir\nSeleccione: ");
 		scanf("%d", &opcion);
 		
@@ -33,7 +39,7 @@ int main() {
 			//tablero
 			char *tablero = (char *)malloc(n * n * sizeof(char));
 			
-			//null para realloc
+			//null vacio para realocar la memoria despues
 			int *historialFilas = NULL;
 			int *historialCols = NULL;
 			
@@ -41,7 +47,7 @@ int main() {
 			tiros = 0;
 			gano = 0;
 			
-			while (tiros < (n * n) && !gano) {
+			while (!gano) {
 				mostrarTablero(tablero, n);
 				printf("Disparo actual: %d\n", tiros + 1);
 				
@@ -93,7 +99,7 @@ int main() {
 //aritmetica de punteros
 void inicializarTablero(char *t, int n, int *fb, int *cb) {
 	for (int i = 0; i < (n * n); i++) {
-		*(t + i) = '.'; 
+		*(t + i) = '.';
 	}
 	*fb = rand() % n;
 	*cb = rand() % n;
@@ -107,13 +113,13 @@ void mostrarTablero(char *t, int n) {
 	for (int i = 0; i < n; i++) {
 		printf("%2d |", i);
 		for (int j = 0; j < n; j++) {
-			// Aritmética de punteros: base + (fila * ancho) + columna
+			// Aritmética de punteros: direccion primer elemento de el array (fila * ancho) + columna
 			printf(" %c ", *(t + (i * n) + j));
 		}
 		printf("\n");
 	}
 }
-// 					(tablero, n,   barcoF, barcoC,  &f_actual,     &c_actual)
+//  				        (tablero, n,   barcoF, barcoC,  &f_actual,     &c_actual)
 int realizarDisparo(char *t, int n, int fb, int cb, int *f_tiro, int *c_tiro) {
 	int f, c;
 	printf("Coordenadas:");
@@ -144,3 +150,4 @@ int realizarDisparo(char *t, int n, int fb, int cb, int *f_tiro, int *c_tiro) {
 		return 0;//agua
 	}
 }
+
